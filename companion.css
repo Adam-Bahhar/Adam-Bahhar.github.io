@@ -1,0 +1,248 @@
+.coding-companion {
+  position: fixed;
+  left: 12px;
+  bottom: 14px;
+  z-index: 15;
+  width: 78px;
+  height: 100px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.companion-character {
+  display: block;
+  width: 78px;
+  height: 94px;
+  overflow: visible;
+  filter: drop-shadow(0 5px 8px #030a1366);
+}
+
+.companion-bubble {
+  position: absolute;
+  left: 0;
+  bottom: 99px;
+  width: 92px;
+  padding: 8px 9px;
+  border: 1px solid #72a8b536;
+  border-radius: 12px 12px 12px 3px;
+  background: #102234ef;
+  box-shadow: 0 5px 20px #030a131f;
+  color: #d8e8f4;
+  font: 500 11px/1.55 var(--body, Arial, sans-serif);
+}
+
+.companion-body,
+.companion-head,
+.companion-eyes,
+.companion-arm,
+.companion-thought,
+.companion-idea,
+.companion-idea-rays,
+.companion-frustration {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.companion-head {
+  transform-origin: center bottom;
+}
+
+.companion-eyes {
+  animation: companion-blink 6.4s infinite;
+}
+
+.companion-body {
+  animation: companion-breathe 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.companion-wave-arm {
+  transform-origin: 94% 92%;
+}
+
+.companion-rest-arm,
+.companion-think-arm,
+.companion-stretch-arms,
+.companion-seated-legs,
+.companion-office-chair,
+.companion-office-desk,
+.companion-laptop,
+.companion-concern,
+.companion-thought,
+.companion-idea,
+.companion-frustration {
+  display: none;
+}
+
+.coding-companion[data-state='welcome'] .companion-wave-arm {
+  animation: companion-wave 2.6s ease-in-out infinite;
+}
+
+.coding-companion:is([data-state='coding'], [data-state='frustrated'], [data-state='office'], [data-state='stretch']) .companion-wave-arm,
+.coding-companion:is([data-state='thinking'], [data-state='idea']) .companion-wave-arm {
+  display: none;
+}
+
+.coding-companion:is([data-state='coding'], [data-state='frustrated'], [data-state='office']) .companion-rest-arm,
+.coding-companion:is([data-state='coding'], [data-state='frustrated'], [data-state='office'], [data-state='stretch']) .companion-laptop,
+.coding-companion:is([data-state='thinking'], [data-state='idea']) .companion-think-arm {
+  display: block;
+}
+
+.coding-companion:is([data-state='coding'], [data-state='office']) .companion-head {
+  animation: companion-code-nod 2.8s ease-in-out infinite;
+}
+
+.coding-companion:is([data-state='coding'], [data-state='office']) .companion-rest-arm,
+.coding-companion:is([data-state='coding'], [data-state='office']) .companion-right-arm {
+  animation: companion-type .7s ease-in-out infinite;
+}
+
+.coding-companion:is([data-state='coding'], [data-state='office']) .companion-right-arm {
+  animation-delay: -.35s;
+}
+
+.companion-code-light {
+  animation: companion-code-light 1.6s ease-in-out infinite;
+}
+
+.coding-companion[data-state='thinking'] .companion-thought {
+  display: block;
+  animation: companion-thought 3s ease-in-out infinite;
+}
+
+.coding-companion[data-state='thinking'] .companion-head {
+  transform: rotate(-5deg);
+}
+
+.coding-companion[data-state='idea'] .companion-idea {
+  display: block;
+  animation: companion-thought 2.8s ease-in-out infinite;
+}
+
+.coding-companion[data-state='idea'] .companion-idea-rays {
+  animation: companion-glow 2s ease-in-out infinite;
+}
+
+.coding-companion[data-state='idea'] .companion-head {
+  transform: rotate(4deg);
+}
+
+.coding-companion[data-state='frustrated'] .companion-head {
+  animation: companion-sigh 3.2s ease-in-out infinite;
+}
+
+.coding-companion[data-state='frustrated'] .companion-frustration,
+.coding-companion[data-state='frustrated'] .companion-concern {
+  display: block;
+}
+
+.coding-companion[data-state='frustrated'] .companion-frustration {
+  animation: companion-sigh-lines 3.2s ease-out infinite;
+}
+
+.coding-companion[data-state='frustrated'] .companion-smile {
+  display: none;
+}
+
+.coding-companion[data-state='frustrated'] .companion-brow-left {
+  transform: rotate(12deg);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.coding-companion[data-state='frustrated'] .companion-brow-right {
+  transform: rotate(-12deg);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.coding-companion:is([data-state='office'], [data-state='stretch']) .companion-office-chair,
+.coding-companion:is([data-state='office'], [data-state='stretch']) .companion-office-desk,
+.coding-companion[data-state='office'] .companion-seated-legs,
+.coding-companion[data-state='stretch'] .companion-stretch-arms {
+  display: block;
+}
+
+.coding-companion[data-state='office'] .companion-standing-legs,
+.coding-companion[data-state='stretch'] .companion-right-arm {
+  display: none;
+}
+
+.coding-companion[data-state='stretch'] .companion-body {
+  animation: companion-stretch 5.5s ease-in-out infinite;
+}
+
+.coding-companion[data-state='stretch'] .companion-head {
+  transform: rotate(-6deg);
+}
+
+.coding-companion.companion-still *,
+.motion-paused .coding-companion * {
+  animation-play-state: paused !important;
+}
+
+@keyframes companion-blink {
+  0%, 43%, 47%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(.08); }
+}
+
+@keyframes companion-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.4px); }
+}
+
+@keyframes companion-wave {
+  0%, 45%, 100% { transform: rotate(0); }
+  10%, 30% { transform: rotate(13deg); }
+  20%, 40% { transform: rotate(-7deg); }
+}
+
+@keyframes companion-code-nod {
+  0%, 100% { transform: rotate(1deg); }
+  50% { transform: rotate(-3deg) translateY(1px); }
+}
+
+@keyframes companion-type {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(1.8px); }
+}
+
+@keyframes companion-code-light {
+  0%, 100% { opacity: .4; }
+  50% { opacity: 1; }
+}
+
+@keyframes companion-thought {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes companion-glow {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
+
+@keyframes companion-sigh {
+  0%, 100% { transform: rotate(0); }
+  35%, 65% { transform: rotate(5deg) translateY(2px); }
+}
+
+@keyframes companion-sigh-lines {
+  0%, 100% { opacity: 0; transform: translateY(3px); }
+  35% { opacity: .8; }
+  70% { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes companion-stretch {
+  0%, 100% { transform: rotate(0); }
+  35%, 65% { transform: rotate(-6deg) translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coding-companion * { animation: none !important; }
+}
+
+@media (max-width: 767px) {
+  .coding-companion { display: none !important; }
+}

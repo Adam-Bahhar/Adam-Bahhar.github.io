@@ -205,6 +205,7 @@ skillFilters.hidden = false;
 
 // The native pointer stays available; the decorative ring never receives input.
 const cursor = document.createElement('div');
+const ambient = document.querySelector('.ambient-background');
 cursor.className = 'cursor-ring';
 cursor.setAttribute('aria-hidden', 'true');
 cursor.innerHTML = '<span></span><i class="cursor-dot"></i><i class="cursor-dot"></i><i class="cursor-dot"></i>';
@@ -223,6 +224,7 @@ function hideCursor() {
   cursorFrame = cursorTime = 0;
   cursorVisible = false;
   cursor.classList.remove('is-visible', 'is-hovering', 'is-pressed');
+  ambient.classList.remove('is-tracking');
 }
 function animateCursor(time) {
   const delta = cursorTime ? Math.min(time - cursorTime, 64) : 16;
@@ -248,6 +250,9 @@ function animateCursor(time) {
     cursorDots[index].style.transform = `translate3d(${point.x - cursorX - (index + 1) * 7}px, ${point.y - cursorY + (index + 1) * 4}px, 0)`;
   });
   cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+  // Share the cursor's idle-stopping frame loop with the background glow.
+  ambient.style.setProperty('--spotlight-x', `${cursorX.toFixed(1)}px`);
+  ambient.style.setProperty('--spotlight-y', `${cursorY.toFixed(1)}px`);
   cursorFrame = settled ? 0 : requestAnimationFrame(animateCursor);
   if (settled) cursorTime = 0;
 }
@@ -267,6 +272,7 @@ document.addEventListener('pointermove', (event) => {
     });
     cursorVisible = true;
     cursor.classList.add('is-visible');
+    ambient.classList.add('is-tracking');
   }
   cursor.classList.toggle('is-hovering', !!event.target.closest('a, button:not(:disabled), summary'));
   if (!cursorFrame) cursorFrame = requestAnimationFrame(animateCursor);

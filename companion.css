@@ -3,16 +3,16 @@
   left: 12px;
   bottom: 14px;
   z-index: 15;
-  width: 78px;
-  height: 100px;
+  width: 110px;
+  height: 140px;
   pointer-events: none;
   user-select: none;
 }
 
 .companion-character {
   display: block;
-  width: 78px;
-  height: 94px;
+  width: 110px;
+  height: 133px;
   overflow: visible;
   filter: drop-shadow(0 5px 8px #030a1366);
 }
@@ -20,15 +20,15 @@
 .companion-bubble {
   position: absolute;
   left: 0;
-  bottom: 99px;
-  width: 92px;
-  padding: 8px 9px;
+  bottom: 140px;
+  width: 126px;
+  padding: 10px 11px;
   border: 1px solid #72a8b536;
   border-radius: 12px 12px 12px 3px;
   background: #102234ef;
   box-shadow: 0 5px 20px #030a131f;
   color: #d8e8f4;
-  font: 500 11px/1.55 var(--body, Arial, sans-serif);
+  font: 500 14px/1.55 var(--body, Arial, sans-serif);
 }
 
 .companion-body,
@@ -241,6 +241,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .coding-companion * { animation: none !important; }
+}
+
+@media (min-width: 768px) and (max-width: 999px) {
+  .coding-companion { width: 88px; height: 113px; }
+  .companion-character { width: 88px; height: 106px; }
+  .companion-bubble { width: 100px; bottom: 113px; padding: 8px; }
 }
 
 @media (max-width: 767px) {

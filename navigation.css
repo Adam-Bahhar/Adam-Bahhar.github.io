@@ -4,7 +4,7 @@
     padding: 10px 16px;
     border-radius: 12px;
     background: #14263c80;
-    font-size: 14px;
+    font-size: 16px;
     transition: border-color .25s, background .25s;
   }
 
@@ -71,7 +71,7 @@
     border-radius: 12px;
     background: #bbdcff05;
     color: var(--text);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.4;
     transition: color .2s, background .2s, border-color .2s;
   }
